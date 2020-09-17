@@ -1,0 +1,6 @@
+﻿@model SportsGoodsListViewModel
+
+@foreach (var good in Model.SportsGoods)
+{
+    <partial name="_sportCard" model="good"/>
+}

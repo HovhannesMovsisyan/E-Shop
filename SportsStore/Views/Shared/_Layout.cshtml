@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro">
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <link href="~/content/site.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button style="height:53px; margin-left:0; background-color:#a593c2" class="openbtn" onclick="openNav()">☰</button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><img style="width:53px; height:53px; margin:0,0,0,0" class="img-responsive" src="~/Images/sportstorelogo.png" /></li>
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <partial name="_LoginPartial" />
+                        @await Component.InvokeAsync("ShoppingCardSummary")
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="mySidebar" class="sidebar">
+            <button href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</button>
+            @await Component.InvokeAsync("CategoryMenu")
+            <a asp-controller="Contact" asp-action="Index">Contact</a>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                @RenderBody()
+                <div class="footer">
+                    <medium>@DateTime.Now.Year &copy; SportStore. Made by H.M.</medium>
+                </div>
+            </div>
+        </div>
+        @RenderSection("Scripts", required: false)
+    </div>
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            padding-bottom: 10px;
+            width: 100%;
+            background-color: #a593c2;
+            color: white;
+            text-align: right;
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            background-color: #a593c2;
+            opacity: 0.9;
+        }
+
+            .sidebar a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: white;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidebar .closebtn {
+                background: transparent;
+                border: transparent;
+                margin-top: 38px;
+                font-size: 30px;
+                margin-left: 150px;
+            }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+        }
+
+            .openbtn:hover {
+                background-color: #444;
+            }
+    </style>
+</body>
+</html>

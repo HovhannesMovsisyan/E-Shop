@@ -1,0 +1,21 @@
+﻿@model SportsGood
+
+<h1>@Model.Name</h1>
+
+<div class="thumbnail">
+    <img alt="@Model.Name" src="@Model.ImageUrl" />
+    <div class="caption-full">
+        <h3 class="pull-right">@Model.Price</h3>
+        <h3><a href="#">@Model.Name</a></h3>
+        <p>@Model.Description</p>
+    </div>
+    <div class="addToCart">
+        <p class="button">
+            <a class="btn btn-success"
+               asp-controller="ShoppingCard"
+               asp-action="AddToShoppingCard"
+               asp-route-goodId="@Model.GoodsId">Add To Card</a>
+        </p>
+    </div>
+   
+</div>

@@ -1,0 +1,37 @@
+﻿@model ShoppingCardViewModel
+
+<h2>Shopping Card: All goods you need</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Selected Amount</th>
+            <th>Goods for sport</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var good in Model.ShoppingCard.ShoppingCardItems)
+        {
+        <tr>
+            <td class="text-left"><a asp-controller="ShoppingCard" 
+                                     asp-action="RemoveFromShoppingCard" 
+                                     asp-route-goodId="@good.SportsGood.GoodsId" alt="">Decrease</a></td>
+            <td class="text-center">@good.Amount</td>
+            <td class="text-center">@good.SportsGood.Name</td>
+            <td class="text-center">@good.SportsGood.Price.ToString("c")</td>
+            <td>@((good.Amount*good.SportsGood.Price).ToString("c"))</td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <td colspan="4" class="text-right">Total</td>
+        <td class="text-right">@Model.ShoppingCardTotal.ToString("c")</td>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-success" asp-controller="ShoppingCard" asp-action="ClearCart">Remove All</a>
+    <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Order</a>
+</div>
